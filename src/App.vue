@@ -1,25 +1,30 @@
 <template>
   <div id="app">
-    <p>adfafd</p>
-    {{showMovies}}
+    <p>this APP</p>
+    <head-comp></head-comp>
+    <body-comp></body-comp>
   </div>
 </template>
 <script>
+import HeadComp from './components/head-comp.vue'
+import BodyComp from './components/body-comp.vue'
+
 
   export default {
     name: 'app',
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App'
       }
     },
     methods: {
 
     },
     computed: {
-      showMovies() {
-        return this.$store.state.movieList
-      }
+
+    },
+    components:{
+      HeadComp,
+      BodyComp
     }
   }
 </script>
