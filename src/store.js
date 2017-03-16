@@ -14,9 +14,10 @@ export const store = new Vuex.Store({
             console.log('mutation setMovieList:', movieList)
             if (movieList.Search) {
                 state.movieListOriginal = movieList.Search;
-                state.filteredMovies = movieList.Search.slice();
+                state.filteredMovies = movieList.Search;
             } else {
                 state.movieListOriginal = [];
+                state.filteredMovies = [];
             }
         },
         filterByTypes(state, item) {
@@ -32,7 +33,7 @@ export const store = new Vuex.Store({
     },
     getters: {
         getMovieList(state) {
-            console.log(state.filteredMovies)
+            console.log('inside getter',state.filteredMovies)
             return state.filteredMovies;
         },
         getMovieListOriginal(state) {
@@ -44,10 +45,10 @@ export const store = new Vuex.Store({
         searchMovieTitle({
             commit
         }, movieToSearch) {
+            console.log('fetching')
             fetch('http://www.omdbapi.com/?s=' + movieToSearch)
                 .then(data => data.json())
                 .then(data => commit('setMovieList', data));
-
         },
 
     }

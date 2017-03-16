@@ -1,7 +1,7 @@
 <template>
     <div class="green-square">
-        <img :src="itemPoster" alt="">
-        {{itemTitle}} {{itemYear}}
+        <img :src="item.Poster" alt="">
+        {{item.Title}} {{item.Year}}
     </div>
 </template>
 <script>
@@ -11,15 +11,7 @@
                 require: true,
                 type: Object
             }
-        },
-        data() {
-            return {
-                itemPoster: this.item.Poster,
-                itemTitle: this.item.Title,
-                itemYear: this.item.Year
-            }
-        },
-        components: {}
+        }
     }
 </script>
 <style>

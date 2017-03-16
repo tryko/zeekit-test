@@ -10,9 +10,12 @@
 <script>
     import MovieComp from './movie-comp.vue';
     export default {
+        data() {
+            return {}
+        },
         computed: {
             showItems() {
-                console.log('bla',this.$store.state.filteredMovies);
+                console.log('bla1', this.$store.getters.getMovieList);
                 return this.$store.getters.getMovieList
             }
         },
