@@ -7,7 +7,8 @@ export const store = new Vuex.Store({
     state: {
         movieTitle: '',
         movieListOriginal: [],
-        filteredMovies: []
+        filteredMovies: [],
+        filtersObj: {}
     },
     mutations: {
         setMovieList(state, movieList) {
@@ -20,20 +21,47 @@ export const store = new Vuex.Store({
                 state.filteredMovies = [];
             }
         },
-        filterByTypes(state, item) {
+        filterItems(state) {
+            console.log('filtering movies')
             state.filteredMovies = state.movieListOriginal.slice();
-            if (item.genre !== 'all') {
-                state.filteredMovies = state.filteredMovies.filter(movie => {
-                    console.log(item)
-                    return movie.Type === item.genre
-                })
+            let filters = Object.keys(state.filtersObj);
+
+            state.filteredMovies = state.filteredMovies.reduce((items, item) => {
+                let passedAllFilters = true;
+                for (var i = 0; i < filters.length; i++) {
+                    if (!state.filtersObj[filters[i]].has(item[filters[i]])) {
+                        passedAllFilters = false;
+                        break;
+                    }
+                }
+                if (passedAllFilters) {
+                    items.push(item)
+
+                }
+                return items
+            }, []);
+            // commit({type:'filterItems'})
+        },
+        changeFilters(state, event) {
+            console.log('filtersObj', state.filtersObj)
+            if (!event.item.checked) {
+                // remove item that already exists
+                state.filtersObj[event.item.propType].delete(event.item.value)
+            } else { // item and or filter type needs to be added
+                if (state.filtersObj[event.item.propType]) {
+                    state.filtersObj[event.item.propType].add(event.item.value)
+                } else {
+                    state.filtersObj[event.item.propType] = new Set();
+                    state.filtersObj[event.item.propType].add(event.item.value)
+                }
             }
-            console.log('filtered movies', state.filteredMovies);
+            console.log('filtersObj', state.filtersObj)
+
         }
     },
     getters: {
         getMovieList(state) {
-            console.log('inside getter',state.filteredMovies)
+            console.log('inside getter', state.filteredMovies)
             return state.filteredMovies;
         },
         getMovieListOriginal(state) {

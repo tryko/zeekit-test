@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <p>this APP</p>
     <head-comp></head-comp>
     <body-comp></body-comp>
   </div>

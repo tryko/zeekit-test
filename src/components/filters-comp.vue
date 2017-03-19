@@ -1,6 +1,5 @@
 <template>
-    <div>
-        this is filter comp
+    <div class="filters-class">
         <filter-by-year-comp :years="getYears"></filter-by-year-comp>
         <filter-ByType-comp :types="getTypes"></filter-ByType-comp>
     </div>
@@ -10,6 +9,23 @@ import FilterByYearComp from './filter-ByYear-comp.vue'
 import FilterByTypeComp from './filter-ByType-comp.vue'
 
     export default {
+        methods:{
+            // changeFilters(item){
+            //     @changeFilters="changeFilters($event)"
+            //     console.log('before commit',item)
+            //     if(event.target.checked){
+            //         this.filters.add(item);
+            //     }else{
+            //         this.filters.delete(item)
+            //     }
+            //     console.log('before commit',this.filters)
+
+            //     this.$store.commit({
+            //         type:'changeFilters',
+            //         obj:[...filters]
+            //     })
+            // }
+        },
         computed:{
             getYears(){
                 let moviesYears = new Set();
@@ -32,5 +48,8 @@ import FilterByTypeComp from './filter-ByType-comp.vue'
     }
 </script>
 <style>
-
+.filters-class{
+    display: flex;
+    justify-content: space-around;
+}
 </style>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        this is body comp
         <filters-comp></filters-comp>
         <movie-list-comp></movie-list-comp>
     </div>
